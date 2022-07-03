@@ -3,4 +3,5 @@ export interface ItemEntity {
     name: string;
     description?: string;
     quantity: number;
+    location: string;
 }
