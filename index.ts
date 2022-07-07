@@ -2,7 +2,7 @@ import express, {json} from "express";
 import cors from "cors";
 import 'express-async-errors';
 import rateLimit from "express-rate-limit";
-import { handleError } from "./utils/errors";
+import {handleError} from "./utils/errors";
 import {itemRouter} from "./routers/item.router";
 
 const app = express();
@@ -17,10 +17,10 @@ app.use(rateLimit({
     max: 100, // Limit each IP to 100 requests per `window` (here, per 5 minutes)
 }));
 
-app.use('/', itemRouter);
+app.use('/item', itemRouter);
 
 app.use(handleError);
 
-app.listen(3001, '0.0.0.0', () => {
+app.listen(3001, 'localhost', () => {
     console.log('Listening on http://localhost:3001');
 });
