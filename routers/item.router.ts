@@ -3,7 +3,12 @@ import {ItemRecord} from "../records/item.record";
 
 export const itemRouter = Router()
     .get('/search/:article?', async (req, res) => {
-        const items = await ItemRecord.findAll(req.params.article ?? '');
+        const items = await ItemRecord.listAllArticle(req.params.article ?? '');
+        res.json({items});
+    })
+
+    .get('/search/:location?', async (req, res) => {
+        const items = await ItemRecord.listAllLocation(req.params.location ?? '');
         res.json({items});
     })
 

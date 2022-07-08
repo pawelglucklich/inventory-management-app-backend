@@ -51,7 +51,7 @@ export class ItemRecord implements ItemEntity {
         return results.length === 0 ? null : new ItemRecord(results[0]);
     }
 
-    static async findAll(article: string): Promise<{ quantity: number; name: string; description: string; location: string; id: string; article: string }[]> {
+    static async listAllArticle(article: string): Promise<{ quantity: number; name: string; description: string; location: string; id: string; article: string }[]> {
         const [results] = await pool.execute("SELECT * FROM `items` WHERE `article` LIKE :search", {
             search: `%${article}%`,
         }) as ItemRecordResult;
@@ -66,6 +66,24 @@ export class ItemRecord implements ItemEntity {
             };
         });
     }
+
+    static async listAllLocation(location: string): Promise<{ quantity: number; name: string; description: string; location: string; id: string; article: string }[]> {
+        const [results] = await pool.execute("SELECT * FROM `items` WHERE `position` LIKE :search", {
+            search: `%${location}%`,
+        }) as ItemRecordResult;
+
+        return results.map(result => {
+            const {
+                id, article, name, description, quantity, location,
+            } = result;
+
+            return {
+                id, article, name, description, quantity, location,
+            };
+        });
+    }
+
+
 
     async insert(): Promise<void> {
         if (!this.id) {
