@@ -68,7 +68,7 @@ export class ItemRecord implements ItemEntity {
     }
 
     static async listAllLocation(location: string): Promise<{ quantity: number; name: string; description: string; location: string; id: string; article: string }[]> {
-        const [results] = await pool.execute("SELECT * FROM `items` WHERE `position` LIKE :search", {
+        const [results] = await pool.execute("SELECT * FROM `items` WHERE `location` LIKE :search", {
             search: `%${location}%`,
         }) as ItemRecordResult;
 
