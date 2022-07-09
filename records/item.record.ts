@@ -15,8 +15,8 @@ export class ItemRecord implements ItemEntity {
     public location: string;
 
     constructor(obj: NewItemEntity) {
-        if (!obj.article || obj.article.length > 10) {
-            throw new ValidationError('Item article number cannot be empty and have more than 10 signs.');
+        if (!obj.article || obj.article.length > 5) {
+            throw new ValidationError('Item article number cannot be empty and have more than 5 signs.');
         }
 
         if (!obj.name || obj.name.length > 100) {
