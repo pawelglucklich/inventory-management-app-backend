@@ -19,12 +19,12 @@ export class ItemRecord implements ItemEntity {
             throw new ValidationError('Item article number cannot be empty and have more than 5 signs.');
         }
 
-        if (!obj.name || obj.name.length > 100) {
-            throw new ValidationError('Item name cannot be empty and have more than 100 signs.');
+        if (!obj.name || obj.name.length > 20) {
+            throw new ValidationError('Item name cannot be empty and have more than 20 signs.');
         }
 
-        if (obj.description.length > 100) {
-            throw new ValidationError('Item description cannot have more than 100 signs.');
+        if (obj.description.length > 20) {
+            throw new ValidationError('Item description cannot have more than 20 signs.');
         }
 
         if (typeof obj.quantity !== 'number' || obj.quantity < 1 || obj.quantity > 999999) {
