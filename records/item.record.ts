@@ -43,15 +43,6 @@ export class ItemRecord implements ItemEntity {
         this.location = obj.location;
     }
 
-    static async update(id: string, location:string): Promise<ItemRecord | null> {
-        const [results] = await pool.execute("UPDATE `items` SET `location`=:location WHERE `id`=:id", {
-            id,
-            location,
-        }) as ItemRecordResult;
-
-        return results.length === 0 ? null : new ItemRecord(results[0]);
-    }
-
     static async listAllArticle(article: string): Promise<{ quantity: number; name: string; description: string; location: string; id: string; article: string }[]> {
         const [results] = await pool.execute("SELECT * FROM `items` WHERE `article` LIKE :search", {
             search: `%${article}%`,
@@ -84,6 +75,12 @@ export class ItemRecord implements ItemEntity {
         });
     }
 
+    static async update(id: string, location: string): Promise<void> {
+        const [results] = await pool.execute("UPDATE `items` SET `location`=:location WHERE `id`=:id", {
+            id,
+            location,
+        }) as ItemRecordResult;
+    }
 
 
     async insert(): Promise<void> {
