@@ -43,9 +43,10 @@ export class ItemRecord implements ItemEntity {
         this.location = obj.location;
     }
 
-    static async getOne(id: string): Promise<ItemRecord | null> {
-        const [results] = await pool.execute("SELECT * FROM `items` WHERE `id` = :id", {
+    static async update(id: string, location:string): Promise<ItemRecord | null> {
+        const [results] = await pool.execute("UPDATE `items` SET `location`=:location WHERE `id`=:id", {
             id,
+            location,
         }) as ItemRecordResult;
 
         return results.length === 0 ? null : new ItemRecord(results[0]);

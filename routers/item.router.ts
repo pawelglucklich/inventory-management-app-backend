@@ -12,8 +12,8 @@ export const itemRouter = Router()
         res.json({items});
     })
 
-    .get('/:id', async (req, res) => {
-        const item = await ItemRecord.getOne(req.params.id);
+    .patch('/:id/:location', async (req, res) => {
+        const item = await ItemRecord.update(req.params.id, req.params.location);
         res.json(item);
     })
 
