@@ -15,24 +15,24 @@ export class ItemRecord implements ItemEntity {
     public location: string;
 
     constructor(obj: NewItemEntity) {
-        if (!obj.article || obj.article.length > 5) {
-            throw new ValidationError('Item article number cannot be empty and have more than 5 signs.');
+        if (obj.article.length !== 5) {
+            throw new ValidationError('Item article have to be 5 characters long.');
         }
 
         if (!obj.name || obj.name.length > 20) {
-            throw new ValidationError('Item name cannot be empty and have more than 20 signs.');
+            throw new ValidationError('Item name cannot be empty and have more than 20 characters.');
         }
 
-        if (obj.description.length > 20) {
-            throw new ValidationError('Item description cannot have more than 20 signs.');
+        if (!obj.description || obj.description.length > 20) {
+            throw new ValidationError('Item description cannot be empty and have more than 20 characters.');
         }
 
         if (typeof obj.quantity !== 'number' || obj.quantity < 1 || obj.quantity > 999999) {
             throw new ValidationError('Item quantity has to be value between 1 and 999 999.');
         }
 
-        if (!obj.location || obj.location.length > 5) {
-            throw new ValidationError('Item location cannot be empty and have more than 5 signs.');
+        if (obj.location.length !== 5) {
+            throw new ValidationError('Item location have to be 5 characters long.');
         }
 
         this.id = obj.id;
